@@ -1,0 +1,12 @@
+p-chart {
+    height: 100% !important; 
+    width: 100% !important; 
+  }
+  .chart-container {
+    resize: both;
+    overflow: hidden;
+    min-width: 200px; /* Minimum width */
+    min-height: 200px; /* Minimum height */
+    max-width: 1000px; /* Optional max width */
+    max-height: 600px; /* Optional max height */
+  }

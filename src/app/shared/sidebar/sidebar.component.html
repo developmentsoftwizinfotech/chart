@@ -1,0 +1,69 @@
+<div class="card flex justify-content-center">
+  <p-sidebar [visible]="true" position="left" [baseZIndex]="false" styleClass="fixed-sidebar" [showCloseIcon]="false">
+    <h3>Charts</h3>
+    <div >
+      <h1>{{ selectedChartType }} Chart</h1>
+
+      <!-- Draggable Chart -->
+      <div
+        draggable="true"
+        (dragstart)="onDragStart($event)"
+        (dragover)="onDragOver($event)"
+        (drop)="onDrop($event)"
+      >
+        <app-chart
+          [chartType]="selectedChartType"
+          [chartData]="chartData"
+          [chartOptions]="chartOptions"
+        ></app-chart>
+      </div>
+    </div>
+
+    <div class="overflow-y-auto">
+      <ul class="list-none p-3 m-0">
+        <li>
+          <div
+            pRipple
+            pStyleClass="@next"
+            enterClass="hidden"
+            enterActiveClass="slidedown"
+            leaveToClass="hidden"
+            leaveActiveClass="slideup"
+            class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+          >
+            <!-- <span class="font-medium">Charts</span>
+            <i class="pi pi-chevron-down"></i> -->
+          </div>
+          <ul>
+            <li><i class="pi pi-chart-bar" style="padding-right: 20px"></i><button (click)="changeChartType('bar')" class="buttons">Bar Chart</button></li>
+            <li><i class="pi pi-chart-line" style="padding-right: 20px"></i><button (click)="changeChartType('line')" class="buttons">Line Chart</button></li>
+            <li><i class="pi pi-chart-pie" style="padding-right: 20px"></i><button (click)="changeChartType('pie')" class="buttons">Pie Chart</button></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </p-sidebar>
+
+  <!-- Drop Target Area -->
+  <div class="drop-target"
+  (dragover)="onDragOver($event)"
+  (drop)="onDrop($event)"
+  (mousemove)="onMouseMove($event)"
+  (mouseup)="onMouseUp()">
+
+<p *ngIf="droppedCharts.length === 0">Drop your chart here</p>
+
+<div *ngFor="let chart of droppedCharts" 
+    class="chart-wrapper"
+    [style.transform]="'translate(' + (chart.x || 0) + 'px, ' + (chart.y || 0) + 'px)'"
+    (mousedown)="onChartMouseDown($event, chart)">
+ <!-- <div class="chart-handle">⋮⋮</div> -->
+ <app-chart
+   [chartType]="chart.chartType"
+   [chartData]="chart.chartData"
+   [chartOptions]="chart.chartOptions">
+ </app-chart>
+</div>
+</div>
+</div>
+
