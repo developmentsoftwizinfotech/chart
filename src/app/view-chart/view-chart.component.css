@@ -1,0 +1,85 @@
+.drop-target {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 80px); /* Adjusted for header height and padding */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fafafa;
+    border-radius: 8px;
+  }
+
+  /* If you still see scrollbars, add this to the content div in app.component.ts */
+  :host {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .chart-wrapper {
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: move;
+    resize: both;
+    overflow: auto;
+    min-width: 200px;
+    min-height: 200px;
+  }
+.resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+    background: #333;
+    cursor: nwse-resize;  
+    z-index: 10;
+}
+.cancel-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+
+  &:hover {
+    background-color: #ff4444;
+    border-color: #ff4444;
+    
+    span {
+      color: white;
+    }
+  }
+
+  span {
+    color: #666;
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+.button-right {
+  float: right;
+}
+.save-button {
+  background-color: #4CAF50;
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 30px;
+}

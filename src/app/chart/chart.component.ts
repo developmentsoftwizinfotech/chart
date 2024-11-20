@@ -15,61 +15,57 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 export class ChartComponent implements OnInit {
   @Input() chartType: 'bar' | 'line' | 'scatter' | 'bubble' | 'pie' | 'doughnut' | 'polarArea' | 'radar' = 'bar';
   @Input() chartData: any;
-  @Input() chartOptions: any;
+  @Input() chartOptions: any = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 0 // Disable animations for smoother resizing
+    }
+  };
+
+  @ViewChild('chartCanvas', { static: true }) chartCanvas!: ElementRef<HTMLCanvasElement>;
   private chartInstance: Chart | null = null;
-  @ViewChild('chartCanvas', { static: true }) chartCanvas!: ElementRef<HTMLCanvasElement>; // Safely access the canvas element
+
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnInit(): void {
-    
-    if (this.chartData) {
+    if (isPlatformBrowser(this.platformId) && this.chartData) {
       this.initializeChart();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (isPlatformBrowser(this.platformId)) {
-      if (changes['chartType'] || changes['chartData'] || changes['chartOptions']) {
-        this.updateChart();
-      }
+    if (isPlatformBrowser(this.platformId) && 
+        (changes['chartType'] || changes['chartData'] || changes['chartOptions'])) {
+          this.updateChart()
     }
   }
-  initializeChart(): void {
-    if (!isPlatformBrowser(this.platformId)) return; 
+
+  private initializeChart(): void {
     const canvas = this.chartCanvas?.nativeElement;
-    if (!this.chartData) {
-      console.error('Chart data or canvas element is missing.');
-      return;
-    }
+    if (!canvas || !this.chartData) return;
+
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
-  
-    const chartConfig: ChartConfiguration = {
-      type: this.chartType as ChartType,
-      data: this.chartData,
-      options: this.chartOptions || {
-        responsive: true,
-        scales: {
-          x: { beginAtZero: true },
-          y: { beginAtZero: true },
-        },
-      },
-    };
-if(this.chartType === 'bar'){
-    this.chartInstance = new Chart(canvas, chartConfig);
-}if(this.chartType === 'line'){
-  this.chartInstance = new Chart(canvas, chartConfig);
-}if(this.chartType === 'pie'){
-  this.chartInstance = new Chart(canvas, chartConfig);
-}
-  }
 
+    this.chartInstance = new Chart(canvas, {
+      type: this.chartType,
+      data: this.chartData,
+      options: this.chartOptions
+    });
+  }
   updateChart(): void {
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
     this.initializeChart();
+  }
+  // Method to handle resize
+  resize(): void {
+    if (this.chartInstance) {
+      this.chartInstance.resize();
+    }
   }
 }
   

@@ -1,8 +1,3 @@
-html, body {
-  height: 100%; 
-  margin: 0;    
-  padding: 0;  
-}
 
 .fixed-sidebar {
     position: sticky;
@@ -23,16 +18,6 @@ html, body {
   .p-sidebar {
     width: 250px; 
   }
-  /* ::ng-deep .link-style{
-    text-decoration: none;
-    color: black;
-    font-size: 17px;
-    list-style-type: none;
-}
-.link-style:hover {
-    color: #0056b3;         
-    background-color: #f1f1f1; 
-  } */
 ul{
     list-style-type: none;
 }
@@ -48,50 +33,3 @@ ul{
     background-color: #f1f1f1; 
 
   }
- 
-  .drop-target {
-    position: relative; 
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .chart-container {
-    position: absolute; 
-    cursor: move; 
-    transition: top 0.2s, left 0.2s; 
-    height: 400px;  
-    width: 100%;   
-    overflow: auto;  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .chart-wrapper {
-    position: absolute;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background: white;
-    cursor: move;
-    user-select: none;
-    transition: top 0.2s,left 0.2s, box-shadow 0.2s;
-  
-    &:hover {
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-  }
-  .chart-handle {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px;
-    cursor: move;
-    color: #666;
-    font-size: 20px;
-    z-index: 10;
-  }
-  
