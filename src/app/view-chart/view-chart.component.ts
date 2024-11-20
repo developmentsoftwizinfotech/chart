@@ -94,13 +94,30 @@ export class ViewChartComponent implements OnInit {
     const data = event.dataTransfer?.getData('application/json');
   
     if (data) {
-      this.droppedCharts.push({
-        ...JSON.parse(data),
-        x: event.clientX - 150,
-        y: event.clientY - 150,
-        width: 400,  
-        height: 300 
-      });
+      const parsedData = JSON.parse(data);
+      
+      // Get the drop target dimensions
+      const dropTarget = document.querySelector('.drop-target') as HTMLElement;
+      const rect = dropTarget?.getBoundingClientRect();
+      
+      // Calculate initial dimensions based on the drop target
+      const initialWidth = rect ? rect.width / 3 : 300;  // Use 1/3 of container width
+      const initialHeight = rect ? rect.height / 3 : 200; // Use 1/3 of container height
+  
+      const newChart = {
+        chartType: parsedData.chartType,
+        chartData: parsedData.chartData,
+        chartOptions: parsedData.chartOptions,
+        // Center the chart where it's dropped
+        // x: event.clientX - (initialWidth / 2),
+        // y: event.clientY - (initialHeight / 2),
+        // width: initialWidth,
+        // height: initialHeight
+      };
+  
+      console.log('Adding new chart:', newChart);
+      this.droppedCharts.push(newChart);
+      // this.saveChartsToLocalStorage();
     }
   }
   removeChart(chart: any): void {
