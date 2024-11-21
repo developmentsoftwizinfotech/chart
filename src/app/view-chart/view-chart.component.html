@@ -1,29 +1,22 @@
- 
+<div class="button-right">
+  <button type="button" class="save-button" (click)="saveDropCharts()">
+    Save
+  </button>
+</div>
+<div class="drop-target" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (mousemove)="onMouseMove($event)"
+  (mouseup)="onMouseUp()">
+  <!-- <p *ngIf="droppedCharts.length === 0">Drop your chart here</p> -->
 
-    <div class="button-right">
-      <button type="button"  class="save-button" (click)="saveDropCharts()">Save</button>
-      </div>
- <div class="drop-target"
-         (dragover)="onDragOver($event)"
-         (drop)="onDrop($event)"
-         (mousemove)="onMouseMove($event)"
-         (mouseup)="onMouseUp()">
-      <p *ngIf="droppedCharts.length === 0">Drop your chart here</p>
-
-      <div *ngFor="let chart of droppedCharts" 
-           class="chart-wrapper"
-           [style.transform]="'translate(' + (chart.x || 0) + 'px, ' + (chart.y || 0) + 'px)'"
-           (mousedown)="onChartMouseDown($event, chart)">
-           <!-- cancel icon -->
-           <div class="cancel-icon" 
-           (click)="removeChart(chart)">
-           <span>&#10005;</span>
-      </div>
-        <app-chart #chartRef
-          [chartType]="chart.chartType"
-          [chartData]="chart.chartData"
-          [chartOptions]="chart.chartOptions">
-        </app-chart>
-      </div>
-      
+  <div *ngFor="let chart of droppedCharts" class="chart-wrapper" 
+  [style.transform]="'translate(' + (chart.x || 0) + 'px, ' + (chart.y || 0) + 'px)'"
+  (mousedown)="onChartMouseDown($event, chart)">
+    <!-- cancel icon -->
+    <div class="cancel-icon" (click)="removeChart(chart)">
+      <span>&#10005;</span>
     </div>
+    <app-chart #chartRef [chartType]="chart.chartType" [chartData]="chart.chartData"
+      [chartOptions]="chart.chartOptions">
+    </app-chart>
+  </div>
+
+<p-toast></p-toast>

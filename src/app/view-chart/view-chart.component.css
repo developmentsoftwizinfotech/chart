@@ -1,14 +1,25 @@
 .drop-target {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 80px); /* Adjusted for header height and padding */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fafafa;
-    border-radius: 8px;
-  }
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #f9f9f9; 
+  overflow: hidden;
+}
+
+.chart-wrapper {
+  position: absolute;
+  width: 300px; 
+  height: 200px;  
+  border: 1px solid #ddd;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: move;
+  resize: both;
+  overflow: auto;
+  min-width: 200px;
+  min-height: 200px;
+}
+
 
   /* If you still see scrollbars, add this to the content div in app.component.ts */
   :host {
@@ -17,7 +28,7 @@
     overflow: hidden;
   }
 
-  .chart-wrapper {
+  /* .chart-wrapper {
     position: absolute;
     background: white;
     border: 1px solid #ddd;
@@ -28,7 +39,7 @@
     overflow: auto;
     min-width: 200px;
     min-height: 200px;
-  }
+  } */
 .resize-handle {
     position: absolute;
     width: 10px;
@@ -83,3 +94,4 @@
   transition: background-color 0.3s ease;
   margin-right: 30px;
 }
+

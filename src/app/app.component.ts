@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent,DragDropModule,RouterModule,HttpClientModule ],
+  imports: [RouterOutlet, SidebarComponent,DragDropModule,RouterModule,CommonModule ],
+  providers: [MessageService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-shared',
   standalone: true,
-  imports: [SidebarComponent,HttpClientModule,ViewChartComponent,CommonModule,HeaderComponent],
+  imports: [SidebarComponent,ViewChartComponent,CommonModule,HeaderComponent],
   templateUrl: './shared.component.html',
   styleUrl: './shared.component.css'
 })
